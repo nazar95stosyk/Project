@@ -1,0 +1,44 @@
+Step1.
+Angular-chart gulp dist-npm
+Chart gulp dist
+
+Step2.
+cd ./dist
+
+Step3
+Open https://npm.fintatech.com/
+login with credentials:
+Login: admin
+Password : sunfloweradmin
+Update page and you will see latest versions of packages
+
+Step3.
+npm init (ENTER ENTER.... ENTER)
+
+Step4.
+Open package.json and replace by
+{
+  "name": "trading-chart-designer",
+  "version": "3.0.6", (version must be updated)
+  "description": "Trading chart designer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chart"
+  ],
+  "author": "support@fintatech.com",
+  "license": "ISC"
+}
+Step5.
+Save package.json
+Step6.
+npm set registry https://npm.fintatech.com/
+Step7.
+npm login
+Login:admin
+Password:sunfloweradmin
+Email:example@aa.aa
+Step8.
+npm publish

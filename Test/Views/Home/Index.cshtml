@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Test.Models.Result>
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+  ViewBag.Title = "Home Page";
+}
+
+<div>
+  <input type="file" name="upload" id="uploadFile" /><br />
+  <input type="text" name="search" id="search">
+  <button id="submit">Загрузить</button>
+</div>
+
+<div>
+  <h3>Results</h3>
+  <table>
+    <tr class="header">
+      <td><p>Words Count</p></td>
+      <td><p>Reverce Sentence</p></td>
+
+    </tr>
+    @foreach (Test.Models.Result b in Model)
+    {
+      <tr>
+        <td><p>@b.Count</p></td>
+        <td><p>@b.ReverceSentence</p></td>
+      </tr>
+    }
+  </table>
+</div>
+
+@section scripts{
+  <script type="text/javascript">
+
+    $('#submit').on('click',
+      function(e) {
+        e.preventDefault();
+        var files = document.getElementById('uploadFile').files;
+        var text = document.getElementById('search').value;
+        if (files.length > 0) {
+          if (window.FormData !== undefined) {
+            var data = new FormData();
+
+              data.append("file" , files[0]);
+
+            data.append("text",text);
+
+            $.ajax({
+              type: "POST",
+              url: '@Url.Action("Upload", "Home")',
+              contentType: false,
+              processData: false,
+              data: data,
+              success: function(result) {
+                document.append(result);
+              },
+              error: function(xhr, status, p3) {
+                alert(xhr.responseText);
+              }
+            });
+          } else {
+            alert("Браузер не поддерживает загрузку файлов HTML5!");
+          }
+        }
+      });
+  </script>
+}
